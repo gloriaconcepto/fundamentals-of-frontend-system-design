@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <title>Frontend System Design Fundamentals</title>
     <link rel="stylesheet" href="./index.css">
+    <template id="card-template">
+        <article class="card">
+            <h3 class="card__title"></h3>
+            <div class="card__body">
+                <div class='card__body__image'></div>
+                <section class='card__body__content'>
+                </section>
+            </div>
+        </article>
+    </template>
 </head>
 <body>
 <main id="container"></main>
 </body>
 <script>
     const container = document.getElementById('container');
-    const html = `<article class="card">
-    <h3 class="card__title"></h3>
-    <div class="card__body">
-      <div class='card__body__image'></div>
-      <section class='card__body__content'>
-      </section>
-    </div>
-  </article>`;
+    const template = document.getElementById('card-template');
 
     /**
      * @param {string} title
@@ -27,6 +30,11 @@
      */
     function createCardComponent(title, body) {
         // @todo - Implement function
+        const element = template.content.cloneNode(true).firstElementChild;
+        const [cardTitle] = element.getElementsByTagName("h3");
+        const [cardBody] = element.getElementsByTagName("section");
+        [cardTitle.textContent, cardBody.textContent] = [title, body];
+        return element;
     }
 
     const component = createCardComponent(
